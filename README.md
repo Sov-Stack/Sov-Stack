@@ -1,14 +1,31 @@
 # Sov-Stack
 
-**Sov-Stack**, short for "sovereign stack" is a solution to the sovereign computing problem for the somewhat technically inclined, especially with a good working knowledge of Docker, or willingness to learn along the way. Host your entire life yourself, starting with Bitcoin and Lightning node, Tor proxy, SyncThing file server, password manager, Nostr relay and more, on almost any hardware, be it x86 or ARM. It sits somewhere in the middle between "turn-key" solutions such as Umbrel, myNode, RaspiBlitz or Start9 and "DIY" approaches such as RaspiBolt. In fact, it draws most of its inspiration from RaspiBolt but instead of you going through all the installation procedures yourself, you get `Dockerfile`s for most services that you can inspect yourself. Your computer then builds these images locally (which includes building most of the services from source as well) and you bring them up as needed.
+**Sov-Stack**, short for "sovereign stack" is a sovereign computing solution for somewhat technically inclined users, especially with a good working knowledge of Docker, or willingness to learn along the way.
+
+Host your entire digital life starting with Bitcoin and Lightning node, Tor proxy, SyncThing file server, password manager, Nostr relay and more, on almost any hardware, be it x86 or ARM.
+
+In terms of technical complexity, it sits somewhere in the middle between "turn-key" solutions such as Umbrel, myNode, RaspiBlitz or Start9 and "DIY" approaches such as RaspiBolt. In fact, it draws most of its inspiration from RaspiBolt but instead of you going through all the installation procedures yourself, you get `Dockerfile`s for most services that you can inspect yourself. Your computer then builds these images locally (which includes building most of the services from source as well) and you bring them up as needed.
 
 # Services
 
-These services are currently available:
-* [Tor](https://www.torproject.org/) proxy (used by other services but also exposed on port 9050 for your own use)
-* [Tailscale](https://tailscale.com/) client (for accessing your services on the go, also available as exit node for your personal VPN)
-* [Bitcoin Core](https://github.com/bitcoin/bitcoin) daemon (bitcoind)
-* [electrs](https://github.com/romanz/electrs), a blockchain indexing service
+The following is a list of services available as part of the stacks, split into categories. Containers are classified by their source:
+
+| Container | Description |
+|-----------|-------------|
+| ![Source](https://img.shields.io/badge/Source-darkgreen) | There is a bespoke `Dockerfile` available in this repository and the service is built from source code. |
+| ![Binary](https://img.shields.io/badge/Binary-556611) | There is a bespoke `Dockerfile` available in this repository but the image uses pre-built binaries. (Must still be FOSS.) |
+| ![Pre-built](https://img.shields.io/badge/Pre--built-554411) | Uses a pre-built image from registry, usually provided by a vendor. `Dockerfile` source must be available and service itself be FOSS. |
+
+| Service | Description | Container | Notes |
+|---------|-------------|-----------|-------|
+| **Networking** |
+| [`tor`](https://torproject.org/) | Onion-routing proxy for privacy | ![Source](https://img.shields.io/badge/Source-darkgreen) |
+| [`tailscale`](https://tailscale.com/) | Mesh VPN client w/ exit node | ![Pre-built](https://img.shields.io/badge/Pre--built-554411) | Client itself is FOSS (WireGuard) but Tailscale backend is proprietary (?). |
+| **Monitoring**|
+| [`cadvisor`](https://github.com/google/cadvisor) | Monitoring daemon for the host and containers | ![Pre-built](https://img.shields.io/badge/Pre--built-554411) |
+| **Bitcoin** |
+| [`bitcoind`](https://github.com/bitcoin/bitcoin) | Bitcoin Core node | ![Source](https://img.shields.io/badge/Source-darkgreen) |
+| [`electrs`](https://github.com/romanz/electrs) | Blockchain indexing service | ![Source](https://img.shields.io/badge/Source-darkgreen) |
 
 Services planned to be included:
 * Lightning Network node + management frontend(s)
@@ -16,6 +33,7 @@ Services planned to be included:
 * SyncThing server
 * Nostr relay
 * Password manager
+* Prometheus + Grafana
 
 # Getting started
 
