@@ -1,0 +1,23 @@
+server=1
+txindex=1
+
+# Enable the following to allow clearnet connections
+#onlynet=ivp4
+
+# The following requires that the tor container is running
+onlynet=onion
+proxy=tor.sov:9050
+
+listen=1
+bind=0.0.0.0
+
+rpcallowip=172.16.0.0/12 # Internal docker network
+rpcbind=0.0.0.0
+
+maxconnections=40
+
+maxmempool=1000
+
+# Enable the following during initial block download
+#dbcache=2000
+#blocksonly=1
