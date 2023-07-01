@@ -84,6 +84,26 @@ services:
     networks:
       - internal-sov
 
+  #################
+  # Miscellaneous #
+  #################
+  syncthing.sov:
+    image: syncthing/syncthing
+    container_name: syncthing.sov
+    hostname: ${SYNCTHING_HOSTNAME}
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /data/syncthing:/var/syncthing
+    ports:
+      - 8384:8384 # Web UI
+      - 22000:22000/tcp # TCP file transfers
+      - 22000:22000/udp # QUIC file transfers
+      - 21027:21027/udp # Receive local discovery broadcasts
+    network_mode: host
+
 networks:
   internal-sov:
     # Internal network, all services should belong in it,

@@ -26,11 +26,12 @@ The following is a list of services available as part of the stacks, split into 
 | **Bitcoin** |
 | [`bitcoind`](https://github.com/bitcoin/bitcoin) | Bitcoin Core node | ![Source](https://img.shields.io/badge/Source-darkgreen) |
 | [`electrs`](https://github.com/romanz/electrs) | Blockchain indexing service | ![Source](https://img.shields.io/badge/Source-darkgreen) |
+| **Miscellaneous** |
+| [`syncthing`](https://syncthing.net/) | Continuous file synchronization | ![Pre-built](https://img.shields.io/badge/Pre--built-554411) |
 
 Services planned to be included:
 * Lightning Network node + management frontend(s)
 * Blockchain explorer
-* SyncThing server
 * Nostr relay
 * Password manager
 * Prometheus + Grafana
