@@ -1,7 +1,11 @@
+ARG ALPINE_TAG=3.18
+ARG CHECKOUT_TAG=v0.9.13
+ARG BUILD_NUM_PROCS=${BUILD_NUM_PROCS:1}
+
 ###############
 # Build stage #
 ###############
-FROM alpine:latest AS build
+FROM alpine:${ALPINE_TAG} AS build
 
 # Install dev dependencies
 RUN apk update && \
@@ -18,16 +22,20 @@ RUN apk update && \
 
 # Checkout source code
 WORKDIR /src
-RUN git clone --branch v0.9.13 https://github.com/romanz/electrs.git
+ARG CHECKOUT_TAG
+RUN git clone --branch ${CHECKOUT_TAG} https://github.com/romanz/electrs.git
 
 # Build application
 WORKDIR /src/electrs
+ARG BUILD_NUM_PROCS
+ENV CARGO_BUILD_JOBS=${BUILD_NUM_PROCS}
 RUN cargo build --release
 
 #################
 # Runtime stage #
 #################
-FROM alpine:latest
+ARG ALPINE_TAG
+FROM alpine:${ALPINE_TAG}
 
 # Install runtime dependencies
 RUN apk update && \

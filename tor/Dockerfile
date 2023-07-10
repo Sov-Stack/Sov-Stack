@@ -1,7 +1,11 @@
+ARG ALPINE_TAG=3.18
+ARG CHECKOUT_TAG=tor-0.4.7.13
+ARG BUILD_NUM_PROCS=${BUILD_NUM_PROCS:1}
+
 ###############
 # Build stage #
 ###############
-FROM alpine:latest AS build
+FROM alpine:${ALPINE_TAG} AS build
 
 # Install dev dependencies
 RUN apk update && \
@@ -26,20 +30,21 @@ RUN apk update && \
 
 # Checkout source code
 WORKDIR /src
-RUN git clone https://git.torproject.org/tor.git && \
-    cd tor && \
-    git checkout tor-0.4.7.13
+ARG CHECKOUT_TAG
+RUN git clone --branch ${CHECKOUT_TAG} https://git.torproject.org/tor.git
 
 # Build application
 WORKDIR /src/tor
+ARG BUILD_NUM_PROCS
 RUN ./autogen.sh && \
     ./configure --disable-asciidoc && \
-    make
+    make -j${BUILD_NUM_PROCS}
 
 #################
 # Runtime stage #
 #################
-FROM alpine:latest
+ARG ALPINE_TAG
+FROM alpine:${ALPINE_TAG}
 
 # Install runtime dependencies
 RUN apk update && \

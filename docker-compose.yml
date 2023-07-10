@@ -5,7 +5,10 @@ services:
   # Networking #
   ##############
   tor.sov:
-    build: ./tor
+    build:
+      context: ./tor
+      args:
+        - BUILD_NUM_PROCS=${BUILD_NUM_PROCS}
     container_name: tor.sov
     restart: unless-stopped
     ports:
@@ -53,7 +56,10 @@ services:
   # Bitcoin #
   ###########
   bitcoind.sov:
-    build: ./bitcoind
+    build:
+      context: ./bitcoind
+      args:
+        - BUILD_NUM_PROCS=${BUILD_NUM_PROCS}
     container_name: bitcoind.sov
     restart: unless-stopped
     stop_grace_period: 5m
@@ -65,7 +71,10 @@ services:
       - internal-sov
 
   electrs.sov:
-    build: ./electrs
+    build:
+      context: ./electrs
+      args:
+        - BUILD_NUM_PROCS=${BUILD_NUM_PROCS}
     container_name: electrs.sov
     restart: unless-stopped
     stop_grace_period: 5m

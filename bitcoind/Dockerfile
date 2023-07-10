@@ -1,7 +1,11 @@
+ARG ALPINE_TAG=3.18
+ARG CHECKOUT_TAG=v25.0
+ARG BUILD_NUM_PROCS=${BUILD_NUM_PROCS:1}
+
 ###############
 # Build stage #
 ###############
-FROM alpine:latest AS build
+FROM alpine:${ALPINE_TAG} AS build
 
 # Install dev dependencies
 RUN apk update && \
@@ -19,21 +23,22 @@ RUN apk update && \
 
 # Checkout source code
 WORKDIR /src
-RUN git clone https://github.com/bitcoin/bitcoin.git && \
-    cd bitcoin && \
-    git checkout tags/v24.0
+ARG CHECKOUT_TAG
+RUN git clone --branch ${CHECKOUT_TAG} https://github.com/bitcoin/bitcoin.git
 
 # Build application
 WORKDIR /src/bitcoin
+ARG BUILD_NUM_PROCS
 RUN ./autogen.sh && \
     ./configure --with-incompatible-bdb --disable-wallet --without-gui && \
-    make -j$(nproc) && \
+    make -j${BUILD_NUM_PROCS} && \
     make install
 
 #################
 # Runtime stage #
 #################
-FROM alpine:latest
+ARG ALPINE_TAG
+FROM alpine:${ALPINE_TAG}
 
 # Install runtime dependencies
 RUN apk update && \
