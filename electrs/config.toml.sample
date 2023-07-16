@@ -1,0 +1,10 @@
+log_filters = "INFO"
+
+db_dir = "/data"
+
+daemon_p2p_addr = "bitcoind.sov:8333"
+daemon_rpc_addr = "bitcoind.sov:8332"
+auth = "sovereign:sovereign"
+network = "bitcoin"
+
+electrum_rpc_addr = "0.0.0.0:50001"

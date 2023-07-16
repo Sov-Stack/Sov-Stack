@@ -81,15 +81,8 @@ services:
     ports:
       - 50001:50001
     volumes:
-      - /data/bitcoind/data:/bitcoin:ro
       - /data/electrs/data:/data
-    environment:
-      - ELECTRS_LOG_FILTERS=INFO
-      - ELECTRS_DAEMON_DIR=/bitcoin
-      - ELECTRS_DB_DIR=/data
-      - ELECTRS_DAEMON_P2P_ADDR=bitcoind.sov:8333
-      - ELECTRS_DAEMON_RPC_ADDR=bitcoind.sov:8332
-      - ELECTRS_ELECTRUM_RPC_ADDR=0.0.0.0:50001
+      - /data/electrs/cfg:/etc/electrs
     networks:
       - internal-sov
 
