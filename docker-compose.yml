@@ -20,7 +20,8 @@ services:
       - internal-sov
 
   tailscale.sov:
-    image: tailscale/tailscale
+    image: tailscale/tailscale:stable
+    pull_policy: always
     container_name: tailscale.sov
     restart: unless-stopped
     volumes:
