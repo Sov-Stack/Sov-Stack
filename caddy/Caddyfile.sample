@@ -1,0 +1,8 @@
+# Replace with the tailnet name of your machine
+MACHINE_TAILNET_NAME {
+  redir /vw /vw/
+
+  handle_path /vw* {
+    reverse_proxy * http://vaultwarden.sov:80
+  }
+}

@@ -26,6 +26,7 @@ services:
     restart: unless-stopped
     volumes:
       - /dev/net/tun:/dev/net/tun
+      - /tmp:/tmp
     environment:
       - TS_AUTHKEY=${TAILSCALE_AUTH_KEY}
       - TS_EXTRA_ARGS=--advertise-exit-node --hostname=${TAILSCALE_HOSTNAME}
@@ -33,6 +34,21 @@ services:
     cap_add:
       - NET_ADMIN
       - NET_RAW
+
+  caddy.sov:
+    image: caddy:latest
+    pull_policy: always
+    container_name: caddy.sov
+    restart: unless-stopped
+    volumes:
+      - /data/caddy/data:/data
+      - /data/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /tmp/tailscaled.sock:/var/run/tailscale/tailscaled.sock
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - internal-sov
 
   ##############
   # Monitoring #
@@ -107,6 +123,16 @@ services:
       - 22000:22000/udp # QUIC file transfers
       - 21027:21027/udp # Receive local discovery broadcasts
     network_mode: host
+
+  vaultwarden.sov:
+    image: vaultwarden/server:latest
+    pull_policy: always
+    container_name: vaultwarden.sov
+    restart: unless-stopped
+    volumes:
+      - /data/vaultwarden/data:/data
+    networks:
+      - internal-sov
 
 networks:
   internal-sov:
