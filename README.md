@@ -21,6 +21,7 @@ The following is a list of services available as part of the stacks, split into 
 | **Networking** |
 | [`tor`](https://torproject.org/) | Onion-routing proxy for privacy | ![Source](https://img.shields.io/badge/0.4.7.13-Source-darkgreen?logo=git&logoColor=white) |
 | [`tailscale`](https://tailscale.com/) | Mesh VPN client w/ exit node | ![Pre-built](https://img.shields.io/badge/latest-Pre--built-554411?logo=docker&logoColor=white) | Client itself is FOSS (WireGuard) but Tailscale backend is proprietary (?). |
+| [`caddy`](https://github.com/caddyserver/caddy) | A simple web server. | ![Pre-built](https://img.shields.io/badge/latest-Pre--built-554411?logo=docker&logoColor=white) | Used as reverse-proxy with SSL termination for other services. |
 | **Monitoring**|
 | [`cadvisor`](https://github.com/google/cadvisor) | Monitoring daemon for the host and containers | ![Pre-built](https://img.shields.io/badge/0.47.1-Pre--built-554411?logo=docker&logoColor=white) |
 | **Bitcoin** |
@@ -28,12 +29,12 @@ The following is a list of services available as part of the stacks, split into 
 | [`electrs`](https://github.com/romanz/electrs) | Blockchain indexing service | ![Source](https://img.shields.io/badge/0.9.13-Source-darkgreen?logo=git&logoColor=white) |
 | **Miscellaneous** |
 | [`syncthing`](https://syncthing.net/) | Continuous file synchronization | ![Pre-built](https://img.shields.io/badge/latest-Pre--built-554411?logo=docker&logoColor=white) |
+| [`vaultwarden`](https://github.com/dani-garcia/vaultwarden) | A lightweight Bitwarden-compatible password manager server | ![Pre-built](https://img.shields.io/badge/latest-Pre--built-554411?logo=docker&logoColor=white) |
 
 Services planned to be included:
 * Lightning Network node + management frontend(s)
 * Blockchain explorer
 * Nostr relay
-* Password manager
 * Prometheus + Grafana
 
 # Getting started
