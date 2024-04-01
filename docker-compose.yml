@@ -100,7 +100,24 @@ services:
       - 4224:4224 # metrics
     volumes:
       - /data/electrs/data:/data
-      - /data/electrs/cfg:/etc/electrs
+      - /data/electrs/conf:/etc/electrs
+    networks:
+      - internal-sov
+
+  jam.sov:
+    image: ghcr.io/joinmarket-webui/jam-standalone # TODO: freeze version
+    container_name: jam.sov
+    restart: unless-stopped
+    environment:
+      - JM_RPC_HOST=bitcoind.sov
+      - JM_RPC_PORT=8332
+      - JM_RPC_USER=${BITCOIND_RPC_USER}
+      - JM_RPC_PASSWORD=${BITCOIND_RPC_PASSWORD}
+      - JM_ENSURE_WALLET=true
+    ports:
+      - 3580:80
+    volumes:
+      - /data/jam/data:/root/.joinmarket
     networks:
       - internal-sov
 

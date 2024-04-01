@@ -1,5 +1,5 @@
 ARG ALPINE_TAG=3.18
-ARG CHECKOUT_TAG=v25.0
+ARG CHECKOUT_TAG=v25.1
 ARG BUILD_NUM_PROCS=${BUILD_NUM_PROCS:1}
 
 ###############
@@ -19,6 +19,8 @@ RUN apk update && \
         libevent-dev \
         zeromq-dev \
         boost-dev \
+        db-dev \
+        sqlite-dev \
         git
 
 # Checkout source code
@@ -30,7 +32,7 @@ RUN git clone --branch ${CHECKOUT_TAG} https://github.com/bitcoin/bitcoin.git
 WORKDIR /src/bitcoin
 ARG BUILD_NUM_PROCS
 RUN ./autogen.sh && \
-    ./configure --with-incompatible-bdb --disable-wallet --without-gui && \
+    ./configure --without-gui --with-incompatible-bdb --disable-bench --disable-tests && \
     make -j${BUILD_NUM_PROCS} && \
     make install
 
@@ -51,6 +53,8 @@ RUN apk update && \
     boost-chrono \
     boost-program_options \
     libzmq \
+    db-c++ \
+    sqlite-libs \
     su-exec
 
 # Copy executable from build to runtime
