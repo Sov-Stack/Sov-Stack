@@ -69,6 +69,23 @@ services:
       - /dev/kmsg:/dev/kmsg
     privileged: true
 
+  bitcoind-exporter.sov:
+    image: jvstein/bitcoin-prometheus-exporter:latest
+    container_name: bitcoind-exporter.sov
+    restart: unless-stopped
+    environment:
+      - BITCOIN_RPC_HOST=bitcoind.sov
+      - BITCOIN_RPC_USER=${BITCOIND_RPC_USER}
+      - BITCOIN_RPC_PASSWORD=${BITCOIND_RPC_PASSWORD}
+      - REFRESH_SECONDS=1
+      - LOG_LEVEL=INFO
+    ports:
+      - 9332:9332
+    depends_on:
+      - bitcoind.sov
+    networks:
+      - internal-sov
+
   ###########
   # Bitcoin #
   ###########
