@@ -24,7 +24,7 @@ The following is a list of services available as part of the stacks, split into 
 | [`caddy`](https://github.com/caddyserver/caddy) | A simple web server. | ![Pre-built](https://img.shields.io/badge/latest-Pre--built-554411?logo=docker&logoColor=white) | Used as reverse-proxy with SSL termination for other services. |
 | **Monitoring**|
 | [`cadvisor`](https://github.com/google/cadvisor) | Monitoring daemon for the host and containers | ![Pre-built](https://img.shields.io/badge/0.47.1-Pre--built-554411?logo=docker&logoColor=white) |
-| [`bitcoin-prometheus-exporter`](https://github.com/jvstein/bitcoin-prometheus-exporter) | Prometheus exporter for Bitcoin nodes | ![Pre-built](https://img.shields.io/badge/0.47.1-Pre--built-554411?logo=docker&logoColor=white) |
+| [`bitcoin-prometheus-exporter`](https://github.com/jvstein/bitcoin-prometheus-exporter) | Prometheus exporter for Bitcoin nodes | ![Pre-built](https://img.shields.io/badge/latest-Pre--built-554411?logo=docker&logoColor=white) |
 | **Bitcoin** |
 | [`bitcoind`](https://github.com/bitcoin/bitcoin) | Bitcoin Core node | ![Source](https://img.shields.io/badge/25.1-Source-darkgreen?logo=git&logoColor=white) |
 | [`electrs`](https://github.com/romanz/electrs) | Blockchain indexing service | ![Source](https://img.shields.io/badge/0.9.13-Source-darkgreen?logo=git&logoColor=white) |
