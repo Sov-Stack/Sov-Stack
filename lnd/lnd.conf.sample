@@ -1,0 +1,70 @@
+[Application Options]
+# TODO: Set the alias for your node, and (if you wish) the color
+alias=CHANGEME
+# color=#FFFFFF
+
+debuglevel=info
+maxpendingchannels=5
+listen=0.0.0.0:9735
+rpclisten=0.0.0.0:10009
+restlisten=0.0.0.0:8080
+
+wallet-unlock-password-file=/root/.lnd/password.txt
+wallet-unlock-allow-create=true
+
+# Automatically regenerate certificate when near expiration
+tlsautorefresh=true
+# Do not include the interface IPs or the system hostname in TLS certificate.
+tlsdisableautofill=true
+
+tlsextradomain=lnd.sov
+# TODO: If you intend to access your node externally (eg. using Zeus wallet), you need to add all hostnames below.
+# This is an example for those who use Tailsale (you need the standalone domain as well as its full Tailnet name):
+# tlsextradomain=sovereign
+# tlsextradomain=sovereign.foo-bar.ts.net
+# If you added these after first launch, delete the tls.cert and tls.key files and restart LND - a new certificate will be generated.
+
+# Channel settings
+bitcoin.basefee=1000
+bitcoin.feerate=1
+minchansize=100000
+accept-keysend=true
+accept-amp=true
+protocol.wumbo-channels=true
+coop-close-target-confs=24
+
+protocol.simple-taproot-chans=true
+protocol.option-scid-alias=true
+protocol.zero-conf=true
+
+wtclient.active=true
+
+# Performance
+gc-canceled-invoices-on-startup=true
+gc-canceled-invoices-on-the-fly=true
+ignore-historical-gossip-filters=1
+stagger-initial-reconnect=true
+
+# Database
+[bolt]
+db.bolt.auto-compact=true
+db.bolt.auto-compact-min-age=168h
+
+[Bitcoin]
+bitcoin.active=true
+bitcoin.mainnet=true
+bitcoin.node=bitcoind
+
+[bitcoind]
+bitcoind.rpchost=bitcoind.sov
+bitcoind.zmqpubrawblock=tcp://bitcoind.sov:28332
+bitcoind.zmqpubrawtx=tcp://bitcoind.sov:28333
+bitcoind.rpcuser=sovereign
+bitcoind.rpcpass=sovereign
+
+[tor]
+tor.active=true
+tor.v3=true
+tor.streamisolation=true
+tor.socks=tor.sov:9050
+tor.control=tor.sov:9051

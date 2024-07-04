@@ -138,6 +138,56 @@ services:
     networks:
       - internal-sov
 
+  #############
+  # Lightning #
+  #############
+  lnd.sov:
+    build:
+      context: ./lnd
+      args:
+        - BUILD_NUM_PROCS=${BUILD_NUM_PROCS}
+    container_name: lnd.sov
+    restart: unless-stopped
+    stop_grace_period: 5m
+    ports:
+      - 9735:9735 # P2P
+      - 28080:8080 # REST
+    volumes:
+      - /data/lnd/data:/root/.lnd
+      - /data/tor:/tor
+    networks:
+      - internal-sov
+
+  rtl.sov:
+    image: shahanafarooqui/rtl:0.15.1
+    container_name: rtl.sov
+    restart: unless-stopped
+    volumes:
+      - /data/lnd/data:/root/.lnd:ro
+      - /data/rtl/data:/database
+      - /data/rtl/conf:/config
+    ports:
+      - 8585:8585
+    environment:
+      RTL_CONFIG_PATH: /config
+      RTL_SSO: 0
+    networks:
+      - internal-sov
+
+  thunderhub.sov:
+    image: apotdevin/thunderhub:v0.13.31
+    container_name: thunderhub.sov
+    restart: unless-stopped
+    environment:
+      - ACCOUNT_CONFIG_PATH=/data/thubConfig.yaml
+    volumes:
+      - /data/lnd/data:/lnd:ro
+      - /data/thunderhub/data:/data
+    ports:
+      - 8686:3000
+    networks:
+      - internal-sov
+
   #################
   # Miscellaneous #
   #################

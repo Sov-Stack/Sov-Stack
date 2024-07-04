@@ -1,0 +1,35 @@
+{
+  "host": "0.0.0.0",
+  "port": 8585,
+  "SSO": {
+    "rtlSso": 0
+  },
+  "defaultNodeIndex": 1,
+  "nodes": [
+    {
+      "index": 1,
+      "lnImplementation": "LND",
+      "authentication": {
+        "macaroonPath": "/root/.lnd/data/chain/bitcoin/mainnet"
+      },
+      "settings": {
+        "blockExplorerUrl": "https://mempool.space",
+        "lnServerUrl": "https://lnd.sov:8080",
+        "userPersona": "MERCHANT",
+        "themeMode": "NIGHT",
+        "themeColor": "TEAL",
+        "unannouncedChannels": false,
+        "logLevel": "ERROR",
+        "fiatConversion": false,
+        "swapServerUrl": "",
+        "boltzServerUrl": "",
+        "enableOffers": false,
+        "enablePeerswap": false,
+        "bitcoindConfigPath": "",
+        "channelBackupPath": "/config/channels-backup/node-1",
+        "logFile": "/config/logs/RTL-Node-1.log"
+      }
+    }
+  ],
+  "multiPass": "CHANGEME"
+}
