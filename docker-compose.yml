@@ -180,6 +180,7 @@ services:
     restart: unless-stopped
     environment:
       - ACCOUNT_CONFIG_PATH=/data/thubConfig.yaml
+      - MEMPOOL_URL=${THUNDERHUB_MEMPOOL_URL}
     volumes:
       - /data/lnd/data:/lnd:ro
       - /data/thunderhub/data:/data
